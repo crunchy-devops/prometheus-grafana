@@ -3,6 +3,8 @@
 
 ```shell
 # start prometheus and node-exporter
+git clone   https://github.com/crunchy-devops/prometheus-grafana.git 
+cd prometheus-grafana
 cd lab-prometheus
 docker-compose up -d
 ```
@@ -69,8 +71,10 @@ sudo systemctl restart nginx
 sudo firewall-cmd --zone=public --add-service=https
 sudo firewall-cmd --zone=public --add-port=9090/tcp
 
-
-
+## change the editor
+```shell
+sudo update-alternatives --config editor
+```
 
 
 
