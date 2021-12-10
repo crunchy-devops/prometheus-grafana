@@ -31,12 +31,10 @@ scrape_configs:
       - targets: ['localhost:9090']
 
   - job_name: 'node'
+    file_sd_configs:
+    - files:
+      - 'targets.json'
 
-    static_configs:
-      - targets: ['node-exporter:9100']
-      - targets: ['137.74.85.233:15000']
-      - targets: ['172.81.179.210:9104']
-      #- targets: ['170.75.170.146:9323']
 
 
 

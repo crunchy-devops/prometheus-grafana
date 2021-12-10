@@ -17,9 +17,11 @@ services:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--web.enable-admin-api"
       - "--storage.tsdb.path=/prometheus"
+      - "--web.enable-lifecycle"
       #- "--storage.tsdb.retention.time=1y"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./targets.json:/etc/prometheus/targets.json
       - ./prometheus_rules.yml:/etc/prometheus/prometheus_rules.yml
       - prometheus_data:/prometheus
     ports:
@@ -35,6 +37,13 @@ services:
     image: bitnami/node-exporter
     ports:
       - "9100:9100"
+    networks:
+      - webnetwork
+  node-exporter2:
+    hostname: node-exporter2
+    image: bitnami/node-exporter
+    ports:
+      - "9200:9100"
     networks:
       - webnetwork
   cadvisor:
