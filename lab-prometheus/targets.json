@@ -1,26 +1,28 @@
 [
   {
     "labels": {
-      "job": "node"
+      "job": "linux-remote"
   },
   "targets": [
-  "node-exporter:9100"
+  "51.254.227.23:9100"
     ]
   },
   {
    "targets": [
-   "node-exporter2:9100"
+   "51.68.28.241:9187"
     ],
     "labels" : {
-      "job": "node"
+      "job": "postgres-db"
     }
   },
   {
     "targets": [
-      "192.168.1.34:9187"
+      "137.74.107.170:9100"
     ],
     "labels" : {
-      "job": "node"
+      "job": "node-exporter"
     }
-}
+  }
+
+
 ]

@@ -24,10 +24,37 @@ pip3 install --upgrade pip # update pip3
 pip3 install ansible # install ansible 
 pip3 install requests # extra packages
 ansible --version # check the version number # should be the latest 2.11.6
-ansible-playbook -i inventory_for_ubuntu install_docker_ubuntu.yml --limit local  # run the playbook for installing docker
+ansible-playbook -i inventory install_docker_ubuntu.yml --limit local  # run the playbook for installing docker
 # close your IDE and start again 
 cd
-cd jenkins-pic
+cd prometheus-grafana
 source venv/bin/activate
 docker ps 
+pip3 install docker 
+pip3 install docker-compose
 ```
+
+## Configure Linux-remote, db, petclinic
+```shell
+ssh-keygen -t rsa -b 4096
+ssh-copy-id ubuntu@51.254.227.23
+ansible-playbook -i inventory install_docker_ubuntu.yml --limit linux,db,petclinic 
+```
+## Install postgresql db on remote
+```shell
+ansible-playbook -i inventory install_db-node_exporter.yml --limit db 
+```
+## Install node_exporter
+```shell
+ansible-playbook -i inventory install_node_exporter_linux.yml --limit linux 
+```
+
+## Install metric-types
+```shell
+ansible-playbook -i inventory install_metric_types.yml --limit petclinic 
+```
+
+
+
+## Reload Prometheus configuration 
+curl -s -XPOST localhost:9090/-/reload

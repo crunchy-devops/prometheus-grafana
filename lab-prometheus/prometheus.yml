@@ -28,7 +28,12 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['137.74.107.170:9090']
+
+  - job_name: 'metric-types'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ '51.68.5.230:8080' ]
 
   - job_name: 'node'
     file_sd_configs:

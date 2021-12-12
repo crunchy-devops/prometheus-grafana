@@ -26,24 +26,24 @@ services:
       - prometheus_data:/prometheus
     ports:
       - "9090:9090"
-    links:
-      - node-exporter
     depends_on:
       - cadvisor
     networks:
       - webnetwork
-  node-exporter:
-    hostname: node-exporter
-    image: bitnami/node-exporter
+  alertmanager:
+    image: bitnami/alertmanager:latest
+    container_name: alertmanager
     ports:
-      - "9100:9100"
+      - 9093:9093
+    volumes:
+      - ./config.yml:/opt/bitnami/alertmanager/conf/config.yml
     networks:
       - webnetwork
-  node-exporter2:
-    hostname: node-exporter2
+  node_exporter:
     image: bitnami/node-exporter
+    container_name: node-exporter
     ports:
-      - "9200:9100"
+      - 9100:9100
     networks:
       - webnetwork
   cadvisor:

@@ -1,0 +1,40 @@
+---
+- hosts: all
+  vars:
+    ansible_python_interpreter: python3
+  tasks:
+    - name: install pip3
+      become: true
+      apt:
+        name: python3-pip
+    - name: pip3 install docker lib python for ansible
+      pip:
+        name: docker
+    - name: Start postgresql latest version
+      docker_container:
+        name: 'db'
+        image: systemdevformations/docker-postgres12
+        state: 'started'
+        env:
+          POSTGRES_PASSWORD: 'password' # Beware: in some version is POSTGRESQL_PASSWORD
+        ports:
+          - "5432:5432"
+        volumes:
+          - "/opt/postgres:/var/lib/postgresql/data"
+          #- "./sql:/tmp"
+      register: db_cont_metadata
+    - name: Start node_exporter for postgresql
+      docker_container:
+        name: 'node_exporter_postgres'
+        image: bitnami/postgres-exporter:latest
+        env:
+          DATA_SOURCE_NAME="postgresql://postgres:password@db:5432/postgres?sslmode=disable"
+        state: 'started'
+        ports:
+          - "9187:9187"
+    - name: Add containers to a network
+      docker_network:
+        name: lan_db
+        connected:
+          - db
+          - node_exporter_postgres

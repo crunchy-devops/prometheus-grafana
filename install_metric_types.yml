@@ -1,0 +1,20 @@
+---
+- hosts: all
+  vars:
+    ansible_python_interpreter: python3
+  tasks:
+    - name: install pip3
+      become: true
+      apt:
+        name: python3-pip
+    - name: pip3 install docker lib python for ansible
+      pip:
+        name: docker
+    - name: Install metrics-types for linux
+      docker_container:
+        name: 'metric-types'
+        image: systemdevformations/metric-types
+        state: 'started'
+        ports:
+          - "8080:8080"
+      register: db_cont_metadata
