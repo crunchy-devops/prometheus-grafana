@@ -51,6 +51,41 @@ ansible-playbook -i inventory install_node_exporter_linux.yml --limit linux
 
 ## Install metric-types
 ```shell
+docker ps
+git clone  https://github.com/crunchy-devops/metric-types.git 
+cd metric-types/
+sudo apt update
+java --version
+sudo apt install openjdk-11-jre-headless
+java --version
+VERSION=7.3.3
+wget https://services.gradle.org/distributions/gradle-${VERSION}-bin.zip -P /tmp
+sudo unzip -d /opt/gradle /tmp/gradle-${VERSION}-bin.zip
+sudo apt install unzip
+sudo unzip -d /opt/gradle /tmp/gradle-${VERSION}-bin.zip
+sudo ln -s /opt/gradle/gradle-${VERSION} /opt/gradle/latest
+sudo vi /etc/profile.d/gradle.sh
+sudo chmod +x /etc/profile.d/gradle.sh
+source /etc/profile.d/gradle.sh
+gradle -v
+gradle build
+cd build
+cd libs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ansible-playbook -i inventory install_metric_types.yml --limit petclinic 
 ```
 

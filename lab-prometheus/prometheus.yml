@@ -33,7 +33,13 @@ scrape_configs:
   - job_name: 'metric-types'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: [ '51.68.5.230:8080' ]
+      - targets: [ '164.132.212.98:8080' ]
+
+  - job_name: 'jenkins'
+    metrics_path: '/prometheus'
+    static_configs:
+      - targets: [ '51.68.28.191:18080' ]
+
 
   - job_name: 'node'
     file_sd_configs:

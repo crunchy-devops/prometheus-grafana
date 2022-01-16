@@ -22,7 +22,14 @@
     "labels" : {
       "job": "node-exporter"
     }
+  },
+  {
+    "targets": [
+      "164.132.212.98:5000"
+    ],
+    "labels" : {
+      "job": "python-app"
+    }
   }
-
 
 ]
