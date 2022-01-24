@@ -17,10 +17,18 @@
   },
   {
     "targets": [
+      "51.68.28.241:9100"
+    ],
+    "labels" : {
+      "job": "linux-db"
+    }
+  },
+  {
+    "targets": [
       "137.74.107.170:9100"
     ],
     "labels" : {
-      "job": "node-exporter"
+      "job": "linux-prometheus"
     }
   },
   {
@@ -29,6 +37,14 @@
     ],
     "labels" : {
       "job": "python-app"
+    }
+  },
+  {
+    "targets": [
+      "164.132.212.98:9100"
+    ],
+    "labels" : {
+      "job": "linux-metric-types"
     }
   }
 

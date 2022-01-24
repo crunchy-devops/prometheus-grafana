@@ -48,6 +48,10 @@ ansible-playbook -i inventory install_db-node_exporter.yml --limit db
 ```shell
 ansible-playbook -i inventory install_node_exporter_linux.yml --limit linux 
 ```
+## Install node_exporter
+```shell
+ansible-playbook -i inventory install_node_exporter_linux.yml --limit metric-types, db
+```
 
 ## Install metric-types
 ```shell
@@ -72,24 +76,9 @@ gradle build
 cd build
 cd libs
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## petclinic example todo
 ansible-playbook -i inventory install_metric_types.yml --limit petclinic 
 ```
-
-
 
 ## Reload Prometheus configuration 
 curl -s -XPOST localhost:9090/-/reload
