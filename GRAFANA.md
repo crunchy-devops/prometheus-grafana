@@ -1,6 +1,7 @@
 # Grafana
 
-## Learn metric types 
+## Learn metric types
+Check in prometheus whether python-app on port 5000 is up and running 
 
 
 

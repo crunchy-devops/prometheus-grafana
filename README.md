@@ -32,6 +32,9 @@ source venv/bin/activate
 docker ps 
 pip3 install docker 
 pip3 install docker-compose
+# change ip address in prometheus.yml and targets.json 
+cd lab-prometheus
+
 ```
 
 ## Configure Linux-remote, db, petclinic

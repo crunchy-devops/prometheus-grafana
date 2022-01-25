@@ -2,7 +2,7 @@
 global:
   scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
   evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  #scrape_timeout: 60s
+  scrape_timeout: 15s
   # scrape_timeout is set to the global default (10s).
 
 # Alertmanager configuration
@@ -26,9 +26,10 @@ scrape_configs:
 
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
-
+    scrape_interval: 5s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+    scrape_timeout: 5s
     static_configs:
-      - targets: ['137.74.107.170:9090']
+      - targets: ['51.255.211.183:9090']
 
   - job_name: 'metric-types'
     metrics_path: '/actuator/prometheus'
