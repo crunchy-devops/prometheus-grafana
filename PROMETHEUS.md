@@ -19,17 +19,40 @@ Scalar
 Instant vector  
 `node_cpu_seconds_total{mode=~"soft.*"}`  
 `scrape_duration_seconds{job="prometheus"}`  
-Range vector we can't see a range vector 
+Range vector we can't see  a range vector graph 
 `scrape_duration_seconds{job="prometheus"}[1m]`  
 `date -d  @1643100478.369` # check date  
 ## overwritten a range vector 
 `scrape_duration_seconds{job="prometheus"}[1m:15s]`  
 Convert range vector to an instant vector using rate() function      
 `rate(scrape_duration_seconds{job="prometheus"}[1m:15s])` 
-# Explanation
+## Explanation
+`node_netstat_Tcp_InSegs{job="linux-prometheus"}`  
+`rate(node_netstat_Tcp_InSegs{job="linux-prometheus"}[15m])`  
+
+## Function 
+`sum(go_threads)`
+
+## sum and rate 
+How to apply aggregation and other operation when using the rate and other counter-only functions.    
+Only functions you can apply to a counter's value are rate, irate, increase, and resets.  
+only rate then sum.    
+otherwise rate() cannot detect counter resets when your target restarts  
+
+
+## Function in Function equals sub-queries 
 `node_netstat_Tcp_InSegs{job="linux-prometheus"}`
+ceil  
+`node_netstat_Tcp_InSegs{job="linux-prometheus"}`   # instant vector  
+`node_netstat_Tcp_InSegs{job="linux-prometheus"}[2m:15s]` # range vector  
+`rate(node_netstat_Tcp_InSegs{job="linux-prometheus"}[2m:15s])` # instant vector
 
+ceil(v instant-vector) rounds the sample values of all elements in v up to the nearest integer.
+`ceil(rate(node_netstat_Tcp_InSegs{job="linux-prometheus"}[2m:15s]))`
 
+## Number 
+Prometheus supports all 64-bits floating point values, including positive infinity, negative infinity and 
+NaN. 
 
 
 

@@ -11,7 +11,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         self.wfile.write(b"Hello World")
 
 if __name__ == "__main__":
-    start_http_server(8000)
-    server = http.server.HTTPServer(('', 8081), MyHandler)
+    start_http_server(18000)
+    server = http.server.HTTPServer(('', 18081), MyHandler)
     server.serve_forever()
 

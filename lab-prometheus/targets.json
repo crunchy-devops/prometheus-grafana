@@ -33,7 +33,7 @@
   },
   {
     "targets": [
-      "51.255.211.183:8000"
+      "51.255.211.183:18000"
     ],
     "labels" : {
       "job": "hello-world"
@@ -54,6 +54,13 @@
     "labels" : {
       "job": "linux-metric-types"
     }
+  },
+  {
+    "targets": [
+      "51.255.211.183:8080"
+    ],
+    "labels" : {
+      "job": "docker"
+    }
   }
-
 ]
