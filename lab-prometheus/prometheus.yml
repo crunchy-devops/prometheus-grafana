@@ -20,6 +20,9 @@ rule_files:
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
+
+
+
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
@@ -35,6 +38,16 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: [ '164.132.212.98:8080' ]
+    # drop a node with its label
+    #metric_relabel_configs:
+    #  - source_labels: [image]
+    #    regex: '.*/(.*)'
+    #    replacement: '$1'
+    #    target_label: id
+    #relabel_configs:
+    #  - source_labels: [__address__]
+    #    regex: '192.xx.xx.xx'
+    #    action: drop
 
   - job_name: 'jenkins'
     metrics_path: '/prometheus'
