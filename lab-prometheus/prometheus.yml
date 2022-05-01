@@ -29,10 +29,10 @@ scrape_configs:
 
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
-    scrape_interval: 5s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-    scrape_timeout: 5s
+    scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+    scrape_timeout: 15s
     static_configs:
-      - targets: ['51.255.211.183:9090']
+      - targets: ['51.254.227.39:9090']
 
   - job_name: 'metric-types'
     metrics_path: '/actuator/prometheus'
@@ -47,6 +47,10 @@ scrape_configs:
     #relabel_configs:
     #  - source_labels: [__address__]
     #    regex: '192.xx.xx.xx'
+    #    action: drop
+    #metric_relabel_configs:
+    #  - source_labels: [ __name__ ]
+    #    regex: container_(network_tcp_usage_total|network_udp_usage_total|tasks_state|cpu_load_average_10s)
     #    action: drop
 
   - job_name: 'jenkins'

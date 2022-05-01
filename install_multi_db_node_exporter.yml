@@ -1,0 +1,109 @@
+---
+- hosts: all
+  vars:
+    ansible_python_interpreter: python3
+  tasks:
+    - name: install pip3
+      become: true
+      apt:
+        name: python3-pip
+    - name: pip3 install docker lib python for ansible
+      pip:
+        name: docker
+    - name: Start postgresql latest version
+      docker_container:
+        name: 'db'
+        image: systemdevformations/docker-postgres12
+        state: 'started'
+        env:
+          POSTGRES_PASSWORD: 'password' # Beware: in some version is POSTGRESQL_PASSWORD
+        ports:
+          - "5432:5432"
+        volumes:
+          - "/opt/postgres:/var/lib/postgresql/data"
+          #- "./sql:/tmp"
+      register: db_cont_metadata
+    - name: Start postgresql1 latest version
+      docker_container:
+        name: 'db1'
+        image: systemdevformations/docker-postgres12
+        state: 'started'
+        env:
+          POSTGRES_PASSWORD: 'password' # Beware: in some version is POSTGRESQL_PASSWORD
+        ports:
+          - "6432:5432"
+        volumes:
+          - "/opt/postgres1:/var/lib/postgresql/data"
+      register: db_cont_metadata
+    - name: Start postgresql2 latest version
+      docker_container:
+        name: 'db2'
+        image: systemdevformations/docker-postgres12
+        state: 'started'
+        env:
+          POSTGRES_PASSWORD: 'password' # Beware: in some version is POSTGRESQL_PASSWORD
+        ports:
+          - "7432:5432"
+        volumes:
+          - "/opt/postgres2:/var/lib/postgresql/data"
+      register: db_cont_metadata
+    - name: Start postgresql3 latest version
+      docker_container:
+        name: 'db3'
+        image: systemdevformations/docker-postgres12
+        state: 'started'
+        env:
+          POSTGRES_PASSWORD: 'password' # Beware: in some version is POSTGRESQL_PASSWORD
+        ports:
+          - "8432:5432"
+        volumes:
+          - "/opt/postgres3:/var/lib/postgresql/data"
+      register: db_cont_metadata
+    - name: Start node_exporter for postgresql
+      docker_container:
+        name: 'node_exporter_postgres'
+        image: bitnami/postgres-exporter:latest
+        env:
+          DATA_SOURCE_NAME="postgresql://postgres:password@db:5432/postgres?sslmode=disable"
+        state: 'started'
+        ports:
+          - "9187:9187"
+    - name: Start node_exporter1 for postgresql
+      docker_container:
+        name: 'node_exporter_postgres1'
+        image: bitnami/postgres-exporter:latest
+        env:
+          DATA_SOURCE_NAME="postgresql://postgres:password@db1:5432/postgres?sslmode=disable"
+        state: 'started'
+        ports:
+          - "10187:9187"
+    - name: Start node_exporter2 for postgresql
+      docker_container:
+        name: 'node_exporter_postgres2'
+        image: bitnami/postgres-exporter:latest
+        env:
+          DATA_SOURCE_NAME="postgresql://postgres:password@db2:5432/postgres?sslmode=disable"
+        state: 'started'
+        ports:
+          - "11187:9187"
+    - name: Start node_exporter3 for postgresql
+      docker_container:
+        name: 'node_exporter_postgres3'
+        image: bitnami/postgres-exporter:latest
+        env:
+          DATA_SOURCE_NAME="postgresql://postgres:password@db3:5432/postgres?sslmode=disable"
+        state: 'started'
+        ports:
+          - "12187:9187"
+    - name: Add containers to a network
+      docker_network:
+        name: lan_db
+        connected:
+          - db
+          - db1
+          - db2
+          - db3
+          - node_exporter_postgres
+          - node_exporter_postgres1
+          - node_exporter_postgres2
+          - node_exporter_postgres3

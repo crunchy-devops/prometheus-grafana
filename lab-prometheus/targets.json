@@ -33,7 +33,7 @@
   },
   {
     "targets": [
-      "51.255.211.183:18000"
+      "51.254.227.39:18000"
     ],
     "labels" : {
       "job": "hello-world"
@@ -62,5 +62,53 @@
     "labels" : {
       "job": "docker"
     }
+  },
+  {
+    "targets": [
+      "164.132.212.98:8080"
+    ],
+    "labels" : {
+      "job": "java"
+    }
+  },
+  {
+    "targets": [
+      "51.255.211.183:9161"
+    ],
+    "labels" : {
+      "job": "oracle-18c"
+    }
+  },
+  {
+    "targets": [
+      "51.68.5.148:9187"
+    ],
+    "labels" : {
+      "job": "postgresql-12"
+    }
+  },
+  {
+    "targets": [
+      "51.68.5.148:10187"
+    ],
+    "labels" : {
+      "job": "postgresql1-12"
+    }
+  },
+  {
+  "targets": [
+    "51.68.5.148:11187"
+  ],
+  "labels" : {
+    "job": "postgresql2-12"
+   }
+  },
+  {
+  "targets": [
+    "51.68.5.148:12187"
+  ],
+  "labels" : {
+    "job": "postgresql3-12"
   }
+}
 ]

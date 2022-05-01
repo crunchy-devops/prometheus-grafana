@@ -34,7 +34,7 @@ pip3 install docker
 pip3 install docker-compose
 # change ip address in prometheus.yml and targets.json 
 cd lab-prometheus
-
+docker-compose up -d 
 ```
 
 ## Configure Linux-remote, db, petclinic

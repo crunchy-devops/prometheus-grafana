@@ -33,3 +33,5 @@ groups:
         annotations:
           summary: "Out of disk space (instance {{ $labels.instance }})"
           description: "Disk is almost full (< 10% left)\n  VALUE = {{ $value }}\n  LABELS: {{ $labels }}"
+      - alert: jenkins_failes
+        expr: node_filesystem_avail_bytes{device="/dev/vda1", fstype="ext4", instance="51.68.28.241:9100", job="linux-db", mountpoint="/etc/hosts"} > 4
