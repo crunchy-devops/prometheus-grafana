@@ -4,11 +4,11 @@ Training on the ubiquitous monitoring tools: Prometheus and Grafana
 ## Pre-requisites on your VM
 ### Useful packages
 ```shell
-   sudo apt-get update  # update links to repos
-   sudo apt-get -y install git wget htop iotop iftop # install git and monitoring tools
-   sudo apt-get -y install python3 python3-venv # install python3 and virtualenv
-   sudo apt-get -y install build-essential   # need for installing docker-compose
-   sudo apt-get -y install python3-dev libxml2-dev libxslt-dev libffi-dev # need for installing docker-compose
+   sudo apt update  # update links to repos
+   sudo apt -y install git wget htop iotop iftop # install git and monitoring tools
+   sudo apt -y install python3 python3-venv # install python3 and virtualenv
+   sudo apt -y install build-essential   # need for installing docker-compose
+   sudo apt -y install python3-dev libxml2-dev libxslt-dev libffi-dev # need for installing docker-compose
    htop  # check your vm config
    Crtl-c  # exit 
 ``` 
@@ -21,18 +21,20 @@ python3 -m venv venv  # set up the module venv in the directory venv
 source venv/bin/activate  # activate the virtualenv python
 pip3 install wheel  # set for permissions purpose
 pip3 install --upgrade pip # update pip3
-pip3 install ansible # install ansible 
-pip3 install requests # extra packages
-ansible --version # check the version number # should be the latest 2.11.6
-ansible-playbook -i inventory install_docker_ubuntu.yml --limit local  # run the playbook for installing docker
-# close your IDE and start again 
-cd
-cd prometheus-grafana
-source venv/bin/activate
-docker ps 
-pip3 install docker 
-pip3 install docker-compose
-# change ip address in prometheus.yml and targets.json 
+pip3 install pyyaml==5.3.1
+pip3 install docker==6.1.3
+pip3 install requests==2.31.0
+pip3 install docker-compose # pip lib for docker-compose 
+
+### Rappel Docker
+#### install docker   
+```shell
+sudo apt update && sudo apt upgrade
+sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt install -y docker-ce
+sudo usermod -aG docker ubuntu 
 cd lab-prometheus
 docker-compose up -d 
 ```

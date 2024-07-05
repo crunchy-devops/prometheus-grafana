@@ -18,7 +18,7 @@
         env:
           POSTGRES_PASSWORD: 'password' # Beware: in some version is POSTGRESQL_PASSWORD
         ports:
-          - "5432:5432"
+          - "35432:5432"
         volumes:
           - "/opt/postgres:/var/lib/postgresql/data"
           #- "./sql:/tmp"
@@ -31,7 +31,7 @@
           DATA_SOURCE_NAME="postgresql://postgres:password@db:5432/postgres?sslmode=disable"
         state: 'started'
         ports:
-          - "9187:9187"
+          - "35187:9187"
     - name: Add containers to a network
       docker_network:
         name: lan_db

@@ -12,7 +12,7 @@ services:
   prometheus:
     hostname: prometheus
     # image: prom/prometheus
-    image: bitnami/prometheus:2.24.1-debian-10-r20
+    image: bitnami/prometheus:latest
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--web.enable-admin-api"
@@ -25,7 +25,7 @@ services:
       - ./prometheus_rules.yml:/etc/prometheus/prometheus_rules.yml
       - prometheus_data:/prometheus
     ports:
-      - "9090:9090"
+      - "31090:9090"
     depends_on:
       - cadvisor
     networks:
@@ -34,7 +34,7 @@ services:
     image: bitnami/alertmanager:latest
     container_name: alertmanager
     ports:
-      - 9093:9093
+      - 31093:9093
     volumes:
       - ./config.yml:/opt/bitnami/alertmanager/conf/config.yml
     networks:
@@ -43,14 +43,14 @@ services:
     image: bitnami/node-exporter
     container_name: node-exporter
     ports:
-      - 9100:9100
+      - 31100:9100
     networks:
       - webnetwork
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
     ports:
-      - 8080:8080
+      - 31080:8080
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:ro
@@ -65,15 +65,15 @@ services:
     image: library/redis:latest
     container_name: redis
     ports:
-    - 6379:6379
+    - 31379:6379
     networks:
       - webnetwork
   grafana:
     #image: grafana/grafana
-    image: grafana/grafana:7.3.7-ubuntu
+    image: grafana/grafana:9.5.20-ubuntu
     container_name: grafana
     ports:
-    - 3000:3000
+    - 31000:3000
     environment:
       - "GF_SECURITY_ADMIN_PASSWORD=admin123"
     networks:
