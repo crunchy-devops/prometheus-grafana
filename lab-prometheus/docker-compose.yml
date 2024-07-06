@@ -11,7 +11,7 @@ volumes:
 services:
   prometheus:
     hostname: prometheus
-    # image: prom/prometheus
+    container_name: prometheus
     image: bitnami/prometheus:latest
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
