@@ -55,7 +55,7 @@ def pg_stat_replication():
         # Mise à jour des métriques Prometheus
         results = cur.fetchall()
         for row in results:
-            replication.labels('kitchen').set(row[0])
+            replication.labels('essai').set(row[0])
 
 
         cur.close()

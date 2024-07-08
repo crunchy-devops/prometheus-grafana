@@ -6,6 +6,7 @@ networks:
 
 volumes:
   prometheus_data:
+  grafana-storage:
 
 
 services:
@@ -76,6 +77,8 @@ services:
     - 31000:3000
     environment:
       - "GF_SECURITY_ADMIN_PASSWORD=admin123"
+    volumes:
+      - grafana-storage:/var/lib/grafana
     networks:
       - webnetwork
 

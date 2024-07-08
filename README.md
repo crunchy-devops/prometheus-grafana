@@ -48,6 +48,20 @@ docker run -d -p 32125:8000 -p 32126:9443 --name portainer \
  -v portainer_data:/data portainer/portainer-ce:2.20.3
 ```
 
+## install postgresql container
+```shell
+docker volume create data
+docker volume ls
+docker run -d \
+	--name db \
+	-e POSTGRES_PASSWORD=Tcwowa12 \
+	-e PGDATA=/var/lib/postgresql/data/pgdata \
+	-v data:/var/lib/postgresql/data \
+	-v /home/ubuntu/postgres_air_2023.sql:/tmp/postgres_air_2023.sql \
+	-p 32432:5432 \
+	postgres:latest
+```
+
 
 
 
