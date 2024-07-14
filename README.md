@@ -42,10 +42,10 @@ docker-compose up -d
 ## Portainer version 2.20.3
 ```shell
 docker volume create portainer_data
-docker run -d -p 32125:8000 -p 32126:9443 --name portainer \ 
- --restart=always \
- -v /var/run/docker.sock:/var/run/docker.sock \  
- -v portainer_data:/data portainer/portainer-ce:2.20.3
+docker run -d -p 32125:8000 -p 32126:9443 --name portainer \
+                  --restart=always \
+                  -v /var/run/docker.sock:/var/run/docker.sock \
+                  -v portainer_data:/data portainer/portainer-ce:2.20.3
 ```
 
 ## install postgresql container
@@ -57,7 +57,6 @@ docker run -d \
 	-e POSTGRES_PASSWORD=Tcwowa12 \
 	-e PGDATA=/var/lib/postgresql/data/pgdata \
 	-v data:/var/lib/postgresql/data \
-	-v /home/ubuntu/postgres_air_2023.sql:/tmp/postgres_air_2023.sql \
 	-p 32432:5432 \
 	postgres:latest
 ```

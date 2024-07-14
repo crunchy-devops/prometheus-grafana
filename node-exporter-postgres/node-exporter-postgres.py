@@ -57,7 +57,6 @@ def pg_stat_replication():
         for row in results:
             replication.labels('essai').set(row[0])
 
-
         cur.close()
         conn.close()
     except Exception as e:
